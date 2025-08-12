@@ -4,6 +4,8 @@
   "version": "1.0",
   "description": "Copy page link as Markdown-formatted link to the clipboard.",
   "permissions": [
+    "tabs",
+    "tabGroups",
     "activeTab",
     "contextMenus",
     "clipboardWrite"
