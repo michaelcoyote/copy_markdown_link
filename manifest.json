@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Copy Markdown Link",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Copy page link as Markdown-formatted link to the clipboard.",
   "browser_specific_settings": {
     "gecko": {
@@ -24,5 +24,12 @@
     "32": "icons/icon-32.png",
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
+  },
+  "commands": {
+    "copy_markdown_link_page_kbd": {
+      "suggested_key": {
+        "default": "Alt+M"
+      }
+    }
   }
 }

@@ -26,39 +26,46 @@ chrome.contextMenus.create({
 });
 
 
+// Link Functions
+//
+// Single tab
+function copyMarkdownLinkForTab(tab) {
+    // Format the page title and URL into a Markdown link
+    const markdownLink = `[${tab.title}](${tab.url})`;
+    navigator.clipboard.writeText(markdownLink);
+}
+// All tabs
+function copyMarkdownLinksForAllTabs() {
+    const markdownLinks = tabs.map((tab) => `- [${tab.title}](${tab.url})`).join('\n');
+    navigator.clipboard.writeText(markdownLinks);
+    console.log('Markdown links copied to clipboard!');
+}
+// Group
+function copyMarkdownLinksForGroup(tab) {
+    const markdownLinks = tabs.map((tab) => `- [${tab.title}](${tab.url})`).join('\n');
+    navigator.clipboard.writeText(markdownLinks);
+    console.log('Markdown links copied to clipboard!');
+}
+
 // Listeners
 //
 // Page Link
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "copy_markdown_link_page") {
-    // Format the page title and URL into a Markdown link
-    const markdownLink = `[${tab.title}](${tab.url})`;
-    // The 'copy' command requires a DOM element.
-    // We can create a temporary textarea element to hold the text.
-    const textarea = document.createElement("textarea");
-    textarea.style.position = "absolute";
-    textarea.style.left = "-9999px";
-    textarea.textContent = markdownLink;
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      // Use the document.execCommand for broader browser compatibility
-      document.execCommand('copy');
-      console.log('Markdown link copied to clipboard!');
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-    // Clean up the temporary element
-    document.body.removeChild(textarea);
+    copyMarkdownLinkForTab(tab);
+  }
+});
+// Keyboard Shortcut Page Link
+chrome.commands.onCommand.addListener((command, tab) => {
+  if (command === "copy_markdown_link_page_kbd") {
+    copyMarkdownLinkForTab(tab);
   }
 });
 // All Tabs
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "copy_markdown_all_tabs") {
     chrome.tabs.query({currentWindow: true}, (tabs) => {
-      const markdownLinks = tabs.map((tab) => `- [${tab.title}](${tab.url})`).join('\n');
-      navigator.clipboard.writeText(markdownLinks);
-      console.log('Markdown links copied to clipboard!');
+      copyMarkdownLinksForAllTabs(tabs);
     });
   }
 });
@@ -78,9 +85,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       return;
       }
     chrome.tabs.query({currentWindow: true, groupId}, (tabs) => {
-      const markdownLinks = tabs.map((tab) => `- [${tab.title}](${tab.url})`).join('\n');
-      navigator.clipboard.writeText(markdownLinks);
-      console.log('Markdown links copied to clipboard!');
+      copyMarkdownLinksForGroup(tab);
     });
   }
 });
