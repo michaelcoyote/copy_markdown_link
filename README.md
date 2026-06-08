@@ -5,10 +5,23 @@ Simply copy the page link or links as Markdown-formatted link to the clipboard.
 
 There are 3 options:
 
-1. Copy page link as Markdown-formatted link to the clipboard.
-2. Copy all page titles in the current tab group as a list of Markdown-formatted links to the clipboard.
+1. Copy page link as Markdown-formatted link to the clipboard (Alt+M).
+2. Copy all page titles in the current tab group as a list of Markdown-formatted links to the clipboard (Alt+Shift+M).
   - Note: This option is available only when the current tab is in a tab group.
-3. Copy all page titles in current window as a list of Markdown-formatted links to the clipboard.
+3. Copy all page titles in current window as a list of Markdown-formatted links to the clipboard (Alt+G).
+
+### Linters
+
+- [eslint](https://eslint.org/)
+- [globals](https://www.npmjs.com/package/globals)
+
+```bash
+npm install --save-dev eslint @eslint/js globals
+```
+
+### Building
+
+I just use `web-ext build` to build the extension and rename to xpi.
 
 ### Application ID
 I programmatically created the application ID using the following command. 
