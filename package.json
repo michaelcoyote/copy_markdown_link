@@ -3,5 +3,8 @@
     "@eslint/js": "^10.0.1",
     "eslint": "^10.4.1",
     "globals": "^17.6.0"
+  },
+  "dependencies": {
+    "web-ext": "^10.3.0"
   }
 }
